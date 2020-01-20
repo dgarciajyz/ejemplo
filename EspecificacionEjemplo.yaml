@@ -1,0 +1,147 @@
+openapi: 3.0.1
+info:
+  title: Proyectos de Investigacion
+  description: >-
+    Esta API provee los servicios necesarios para gestionar proyectos de
+    investigacion.
+  version: '1.0'
+  termsOfService: 'http://spilab.es/'
+  contact:
+    name: Proyectos de Investigacion
+    url: 'http://spilab.es/'
+    email: dgarciajyz@alumnos.unex.es
+paths:
+  /administration:
+    get:
+      tags:
+        - Administracion
+      summary: Devuelve todo lo relacionado con un usuario de administracion....
+      description: Devuelve todo lo relacionado con un usuario de administracion
+      operationId: usuarioAdministracion
+      parameters:
+        - name: idAdministration
+          in: query
+          description: Id del personal de administracion
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          $ref: '#/components/responses/201'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+    post:
+      tags:
+        - Administracion
+      summary: Registra un nuevo usuario de administracion
+      description: Creacion de nuevos usuarios de administracion.
+      operationId: registroAdministracion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Administration'
+      responses:
+        '201':
+          $ref: '#/components/responses/201'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+    put:
+      tags:
+        - Administracion
+      summary: Modifica un usuario de administracion
+      description: Modificacion de usuarios de administracion.
+      operationId: editarAdministracion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Administration'
+      responses:
+        '201':
+          $ref: '#/components/responses/201'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+    delete:
+      tags:
+        - Administracion
+      summary: Elimina un usuario de administracion
+      description: Elimina usuarios de administracion.
+      operationId: eliminarAdministracion
+      parameters:
+        - name: idAdministration
+          in: query
+          description: Id del personal de administracion
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          $ref: '#/components/responses/201'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'          
+
+components:
+  schemas:
+    Administration:
+      type: object
+      properties:
+        idAdministration:
+          type: integer
+          format: int64
+          example: 1
+        email:
+          type: string
+          example: ""
+        last_first_name:
+          type: string
+          example: Esther 
+        complete_name:
+          type: string
+          example: Esther 
+        category:
+          type: string
+          example: OTRI 
+  responses:
+    '200':
+      description: Successful operation
+      content:
+        text/plain:
+          schema:
+            title: Created
+            type: string
+            example: Created      
+    '201':
+      description: Created
+      content:
+        text/plain:
+          schema:
+            title: Created
+            type: string
+            example: Created
+    '404':
+      description: Not found response
+      content:
+        text/plain:
+          schema:
+            title: Endpoint not found
+            type: string
+            example: Not found
+    '405':
+      description: Invalid input
+      content:
+        text/plain:
+          schema:
+            title: Invalid input
+            type: string
+            example: The format is not valid
